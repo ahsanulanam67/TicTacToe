@@ -26,14 +26,18 @@ export default function Board({squares, nextTurn, onPlayReference}) {
 
     let status;
 
-    if(winner){
+    if(winner === "Draw"){
+      status = "This match is drawn";
+    }
+    else if(winner){
       status = "Winner is " + winner;
     }
+
     else status = "Next turn is for : " + (nextTurn ? 'X':'O');
 
   return (
     <>
-      <h1>This is the TicTacToe Board</h1>
+      <h1>Lets play the popular TicTacToe</h1>
       <div className="board-row">
         <Squares value={squares[0]} onClickReference={()=>handClick(0)}/>
         <Squares value = {squares[1]} onClickReference={() => handClick(1)} />
@@ -79,6 +83,12 @@ function whoisthewinner(squares){
       if(squares[a] && squares[a]===squares[b] && squares[b] === squares[c])return squares[a];
       
   }
+  let c = 0;
+  for(let i = 0;i<squares.length;i++){
+
+      if(squares[i])c++;
+  }
+  if(c === squares.length)return "Draw";
 
 
 }
